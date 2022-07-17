@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
 echo "PACKAGECLOUD_REPO=${PACKAGECLOUD_REPO}"
 echo "PACKAGECLOUD_DISTRO=${PACKAGECLOUD_DISTRO}"
