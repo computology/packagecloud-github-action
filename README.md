@@ -1,4 +1,6 @@
 # Push/Upload  package to packagecloud.io
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action?ref=badge_shield)
+
 
 This action encapsulates the setup to push/upload any package to packagecloud.io.
 
@@ -22,3 +24,7 @@ inputs:
     description: The Token with push access. If logged in, you can get it [here](https://packagecloud.io/api_token)
     required: true
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action?ref=badge_large)
