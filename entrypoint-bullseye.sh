@@ -10,4 +10,4 @@ UPLOAD_PATH="${PACKAGECLOUD_USERNAME}/${PACKAGECLOUD_REPONAME}/${PACKAGECLOUD_DI
 echo "Pushing package: ${PACKAGE_NAME}"
 echo "To repository: ${UPLOAD_PATH}"
 
-package_cloud push ${UPLOAD_PATH} ${PACKAGE_NAME}
+/usr/local/bundle/bin/package_cloud push ${UPLOAD_PATH} ${PACKAGE_NAME}
