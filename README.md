@@ -1,4 +1,7 @@
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action?ref=badge_shield)
+
 # Push/Upload  package to packagecloud.io
+
 
 This action encapsulates the setup to push/upload any package to packagecloud.io.
 
@@ -22,6 +25,11 @@ inputs:
     description: The Token with push access. If logged in, you can get it [here](https://packagecloud.io/api_token)
     required: true
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcomputology%2Fpackagecloud-github-action?ref=badge_large)
+
 
 ## Usage
 ```yaml
@@ -56,5 +64,3 @@ jobs:
   * On your github repo, click 'Settings'
   * On the left nav bar, under 'Security', click 'Secrets and variables'
   * Add a secret with name 'packagecloud_token' and value of API token from <https://packagecloud.io/api_token>
-
-
