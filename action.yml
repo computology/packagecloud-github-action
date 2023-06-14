@@ -1,4 +1,4 @@
-name: Upload package PackageCloud.io
+name: Push package to packagecloud.io
 description: Push package to packagecloud.io
 branding:
   icon: package
