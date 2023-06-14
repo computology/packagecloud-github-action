@@ -1,5 +1,5 @@
 name: Upload package PackageCloud.io
-description: Upload a package to PackageCloud.io
+description: Push package to packagecloud.io
 branding:
   icon: package
   color: blue
