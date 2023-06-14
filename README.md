@@ -32,6 +32,11 @@ inputs:
 
 
 ## Usage
+* To use the github action, you need to:
+  1. Create a directory `.github/workflows`.
+  2. In that directory, create a yml file (can be any name, e.g., 'upload.yml') containing github action configuration.
+    * To use the official packagecloud.io github action, the yml file should contain the contents below with the sections marked `MODIFY` replaced with appropriate values
+  3. See 'Additional Steps' to add your packagecloud.io API token.
 ```yaml
 name: dev-ci
 on: [push]
@@ -42,7 +47,7 @@ jobs:
 ##### MODIFY: Add steps to build package or copy package to github action container
 #####         so it is available to github action to upload to packagecloud
       - name: push package to packagecloud.io
-        uses: computology/packagecloud-github-action@v0.6
+        uses: computology/packagecloud-github-action
         with:
 ##### MODIFY: Change to packagecloud username, reponame, distro type
 #####         To understand the available distro type, see <https://www.rubydoc.info/gems/package_cloud/#pushing-a-package>
