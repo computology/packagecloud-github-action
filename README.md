@@ -78,7 +78,6 @@ To build and check the image locally without uploading a package:
 
 ```bash
 docker build --pull -t packagecloud-action:test .
-docker run --rm --entrypoint ruby -v "$PWD/test:/test:ro" packagecloud-action:test /test/verify-trust.rb
 docker run --rm --entrypoint package_cloud packagecloud-action:test version
 ```
 
