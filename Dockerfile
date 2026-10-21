@@ -1,26 +1,18 @@
-FROM ubuntu:focal
-SHELL ["/bin/bash", "-l", "-c"]
+FROM ruby:3.4-slim-bookworm
 
-RUN apt-get update
+# Debian's security update removes both emSign ECC Root CA - G3 and
+# AAA Certificate Services, covering the compromised intermediates' cross-signs.
+# https://security-tracker.debian.org/tracker/DLA-4845-1
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates build-essential \
+    && dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge '20250419~deb12u2' \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-# Required to download things from internet
-RUN apt-get install -y curl
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+    SSL_CERT_DIR=/etc/ssl/certs
 
-# Install build tools required for building native extensions
-RUN apt-get install -y build-essential
+RUN gem install package_cloud --version 0.3.15 --no-document
 
-# Required for apt-add-repository
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
-
-# Install rvm
-RUN  gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
-RUN source /usr/local/rvm/scripts/rvm
-RUN rvm install 2.7.5
-RUN rvm use 2.7.5 && gem install package_cloud
-
-# Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
-
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]

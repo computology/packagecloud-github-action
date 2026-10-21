@@ -47,7 +47,7 @@ jobs:
 ##### MODIFY: Add steps to build package or copy package to github action container
 #####         so it is available to github action to upload to packagecloud
       - name: push package to packagecloud.io
-        uses: computology/packagecloud-github-action
+        uses: computology/packagecloud-github-action@master
         with:
 ##### MODIFY: Change to packagecloud username, reponame, distro type
 #####         To understand the available distro type, see <https://www.rubydoc.info/gems/package_cloud/#pushing-a-package>
@@ -56,6 +56,29 @@ jobs:
           PACKAGECLOUD-REPONAME: test_repo
           PACKAGECLOUD-DISTRO: python
           PACKAGECLOUD-TOKEN: ${{ secrets.packagecloud_token }}
+```
+
+### Runtime and certificate updates
+
+The action builds the checked-in Dockerfile on the GitHub runner instead of
+pulling the old prebuilt Docker Hub image. This adds image-build time to each
+workflow run, but ensures the action uses the runtime and certificate policy in
+the selected Git revision. Prefer pinning a reviewed full commit SHA or release
+containing this change rather than the moving `master` example above. Existing
+older action tags still reference the old image and do not receive this fix.
+
+The image uses Ruby 3.4 and Debian Bookworm's system certificate store. Builds
+require `ca-certificates` version `20250419~deb12u2` or newer, which removes trust
+in `emSign ECC Root CA - G3` and `AAA Certificate Services` following the
+[eMudhra intermediate CA compromise](https://emudhra.we-have-a-problem.com/).
+Certificate and hostname verification remain enabled; the action does not add a
+custom certificate blocklist or modify the runner host's trust store.
+
+To build and check the image locally without uploading a package:
+
+```bash
+docker build --pull -t packagecloud-action:test .
+docker run --rm --entrypoint package_cloud packagecloud-action:test version
 ```
 
 ## Example
