@@ -1,0 +1,21 @@
+name: Test action image
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with updated certificates
+        run: docker build --pull -t packagecloud-action:test .
+      - name: Verify runtime certificate trust
+        run: docker run --rm --entrypoint ruby -v "$PWD/test:/test:ro" packagecloud-action:test /test/verify-trust.rb
+      - name: Verify CLI starts
+        run: docker run --rm --entrypoint package_cloud packagecloud-action:test version
